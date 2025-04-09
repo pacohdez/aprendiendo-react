@@ -1,34 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-
+import { TwitterFollowCard } from './TwitterFollowCard'
 function App() {
-  const [count, setCount] = useState(0)
+  const format = (userName) => `@${userName}`
+  //const heriberto = {formatUserName: format, userName: 'sistemasiq', name: 'Heriberto Flores', isFollowing: true}
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+  const users = [
+    {
+      userName: "pacohdez",
+      name: "Francisco Hernández Cabrera",
+      isFollowing: true
+    },
+    {
+      userName: "jakqui",
+      name: "Jakqueline Herrera García",
+      isFollowing: false
+    },
+    {
+      userName: "sistemasiq",
+      name: "Heriberto Flores Chavez",
+      isFollowing: false
+    }
+  ]
+
+  return(
+    <section className='App'>
+      {/* <TwitterFollowCard formatUserName={format} userName="pacohdez" name="Francisco Hernández Cabrera" initialIsFollowing={true} />
+      <TwitterFollowCard formatUserName={format} userName="jakqui" name="Jakqueline Herrera García" />
+      <TwitterFollowCard {...heriberto} /> */}
+
+      {/* Usando el arreglo de usuarios de forma dinamica */}
+      {
+        users.map(({userName, name, isFollowing}) => { //user
+          //const {userName, name, isFollowing} = user
+          return (
+            <TwitterFollowCard
+              key={userName}
+              formatUserName={format}
+              userName={userName}
+              name={name}
+              initialIsFollowing={isFollowing}
+            ></TwitterFollowCard>
+          )
+        })
+      }
+    </section>
   )
 }
 
